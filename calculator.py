@@ -1,5 +1,5 @@
 import sys
-from tkinter import Tk, Button, Grid, Frame, N, E, S, W
+from tkinter import Tk, Button, Grid, Frame, N, E, S, W, PhotoImage
 from card import Card
 
 
@@ -25,7 +25,9 @@ class OddsCalculator():
                 value = values[col_index]
                 Grid.columnconfigure(frame, col_index, weight=1)
                 self.button = Button(frame, text = value + " " + suit, command= lambda value = value, suit = suit : self.create_card(value, suit))
-                self.button.grid(row=row_index, column=col_index, sticky=N+S+E+W, options = 'fg'= 'black')  
+                # homescreenImage = PhotoImage(file="/Users/landonmarshall/Desktop/PacificHoldEmCalculator/Cards/" + value+suit.capitalize()+".jpg") 
+                self.button.config(image = "/Users/landonmarshall/Desktop/PacificHoldEmCalculator/Cards/"+ value+suit.capitalize()+".jpg")
+                self.button.grid(row=row_index, column=col_index, sticky=N+S+E+W)  
         # for value in values:
         #     self.button = Button(master, text = value + "S", command= lambda value = value, suit = 's' : self.create_card(value, suit))
         #     self.button.grid(row = 0, column = i, columnspan=13, sticky=N+S+E+W)
