@@ -4,28 +4,38 @@ from card import Card
 
 
 suits = ['d', 'h', 's', 'c']
-values = ['2','3','4','5','6','7','8','9','10','J','Q','K','A']
+values = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A']
 hands_list = []
 building_hand = []
+
+
 class OddsCalculator():
     def __init__(self, master):
+        self.master = master
+
         master.geometry("1000x400")
         master.resizable(width=False, height=False)
-        frame=Frame(master)
-        frame.grid(row=0, column=0, sticky=N+S+E+W)
-        self.master = master
         master.title("Odds Calculator")
+
+        frame = Frame(master)
+        frame.grid(row=0, column=0, sticky=N+S+E+W)
+
         i = 0
+
         Grid.rowconfigure(master, 0, weight=1)
         Grid.columnconfigure(master, 0, weight=1)
+
         for row_index in range(len(suits)):
             suit = suits[row_index]
             Grid.rowconfigure(frame, row_index, weight=1)
+
             for col_index in range(len(values)):
                 value = values[col_index]
                 Grid.columnconfigure(frame, col_index, weight=1)
-                self.button = Button(frame, text = value + " " + suit, command= lambda value = value, suit = suit : self.create_card(value, suit))
-                self.button.grid(row=row_index, column=col_index, sticky=N+S+E+W, options = 'fg'= 'black')  
+                self.button = Button(frame, text=value + " " + suit,
+                                     command=lambda value=value, suit=suit: self.create_card(value, suit))
+                self.button.grid(row=row_index, column=col_index, sticky=N+S+E+W, options='fg'='black')
+
         # for value in values:
         #     self.button = Button(master, text = value + "S", command= lambda value = value, suit = 's' : self.create_card(value, suit))
         #     self.button.grid(row = 0, column = i, columnspan=13, sticky=N+S+E+W)
@@ -38,43 +48,41 @@ class OddsCalculator():
         # self.twos.grid(row=0, column=0, columnspan=13, sticky="we")
         # self.twod = Button(master, text="Two D", command= lambda value = '2', suit = 'd' : self.create_card(value, suit))
         # self.twod.grid(row=1, column=0, columnspan=13, sticky="we")
-    # Validate input string to determine if input is valid card format
+
     def valid_card(self, value, suit):
-        if value in values and suit in suits:
-            return True
-        else:
-            return False
+        """ Validate input string to determine if input is valid card format """
+        return value in values and suit in suits
 
     def create_card(self, value, suit):
-        print (value + ' ' + suit)
+        print(value + ' ' + suit)
         if self.valid_card(value, suit):
             card = Card(value, suit)
             self.build_hand(card)
         self.print_hands()
         return
 
-    # Print out the current hand being built, as well as the list of hands
     def print_hands(self):
-        print ('Current hand: ', building_hand)
-        print ('Hands after new addition: ', hands_list)
+        """ Print out the current hand being built as well as the list of hands """
+        print('Current hand: ', building_hand)
+        print('Hands after new addition: ', hands_list)
 
-    # Build a hand and if the hand is complete, add it to the list of hands
     def build_hand(self, card):
+        """ Build a hand and if the hand is complete, add it to the list of hands """
         global building_hand
-        if len(building_hand) == 0 :
+
+        if len(building_hand) == 0:
             building_hand.append(card)
-        else: 
+        else:
             building_hand.append(card)
             hands_list.append(building_hand)
             building_hand = []
+
 
 def main():
     root = Tk()
     gui = OddsCalculator(root)
     root.mainloop()
-    
 
-    
     # while(1):
     #     new_card = input("Enter a card (Format Like 2s/ Jd/ Ah), or exit to terminate: ")
     #     if new_card in ['Exit', 'exit']:
@@ -89,5 +97,6 @@ def main():
     #             print('Invalid card format')
     #         print_hands()
 
-if __name__== "__main__":
+
+if __name__ == "__main__":
     main()
