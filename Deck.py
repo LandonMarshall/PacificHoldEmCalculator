@@ -10,13 +10,18 @@ class Deck:
         self.hearts_available= [-1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
         self.cards_array = [self.diamonds_available, self.hearts_available, \
             self.spades_available, self.clubs_available]
+        self.deck_size = 52
 
     def __str__(self):
         return '           A  2  3  4  5  6  7  8  9  10 J  Q  K' + '\n' + \
                'Diamonds:  ' + '  '.join([str(elem) for elem in self.diamonds_available[1:]]) + '\n' + \
                'Hearts:    ' + '  '.join([str(elem) for elem in self.hearts_available[1:]]) + '\n' + \
                'Spades:    ' + '  '.join([str(elem) for elem in self.spades_available[1:]]) + '\n' + \
-               'Clubs:     ' + '  '.join([str(elem) for elem in self.clubs_available[1:]]) 
+               'Clubs:     ' + '  '.join([str(elem) for elem in self.clubs_available[1:]]) + '\n' + \
+               'Total cards left: ' + str(self.deck_size)
                
     def remove(self, card):
-        self.cards_array[suits[card.suit]][values[card.value]] = 0
+        
+        if self.cards_array[suits[card.suit]][values[card.value]] == 1:
+            self.cards_array[suits[card.suit]][values[card.value]] = 0
+            self.deck_size -= 1
