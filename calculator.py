@@ -1,13 +1,15 @@
 import sys
 import os
 from tkinter import Tk, Button, Grid, Frame, N, E, S, W, PhotoImage, Image
-from card import Card
+from Card import Card
+from Deck import Deck
 
 
 suits = ['d', 'h', 's', 'c']
 values = ['A', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K']
 hands_list = []
 building_hand = []
+deck = Deck()
 
 class OddsCalculator():
     def __init__(self, master):
@@ -41,6 +43,7 @@ class OddsCalculator():
                     suit = suit : self.create_card(value, suit))
                 self.button.grid(row=row_index, column=col_index)  
                 i = i + 1
+        print(deck)
 
     def valid_card(self, value, suit):
         """ Validate input string to determine if input is valid card format """
@@ -52,12 +55,16 @@ class OddsCalculator():
             card = Card(value, suit)
             self.build_hand(card)
         self.print_hands()
+        deck.remove(card)
+        print(deck)
         return
 
     def print_hands(self):
         """ Print out the current hand being built as well as the list of hands """
         print('Current hand: ', building_hand)
         print('Hands after new addition: ', hands_list)
+
+    
 
     def build_hand(self, card):
         """ Build a hand and if the hand is complete, add it to the list of hands """
