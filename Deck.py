@@ -19,5 +19,4 @@ class Deck:
                'Clubs:     ' + '  '.join([str(elem) for elem in self.clubs_available[1:]]) 
                
     def remove(self, card):
-        print(suits[card.suit])
         self.cards_array[suits[card.suit]][values[card.value]] = 0

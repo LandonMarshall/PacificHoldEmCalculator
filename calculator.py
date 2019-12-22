@@ -43,11 +43,12 @@ class OddsCalculator():
                     suit = suit : self.create_card(value, suit))
                 self.button.grid(row=row_index, column=col_index)  
                 i = i + 1
-        print(deck)
+
 
     def valid_card(self, value, suit):
         """ Validate input string to determine if input is valid card format """
         return value in values and suit in suits
+
 
     def create_card(self, value, suit):
         print(value + ' ' + suit)
@@ -59,13 +60,13 @@ class OddsCalculator():
         print(deck)
         return
 
+
     def print_hands(self):
         """ Print out the current hand being built as well as the list of hands """
         print('Current hand: ', building_hand)
         print('Hands after new addition: ', hands_list)
 
     
-
     def build_hand(self, card):
         """ Build a hand and if the hand is complete, add it to the list of hands """
         global building_hand
@@ -76,6 +77,7 @@ class OddsCalculator():
             building_hand.append(card)
             hands_list.append(building_hand)
             building_hand = []
+
 
 def main():
     root = Tk()
