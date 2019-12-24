@@ -21,7 +21,6 @@ class Deck:
                'Total cards left: ' + str(self.deck_size)
                
     def remove(self, card):
-        
         if self.cards_array[suits[card.suit]][values[card.value]] == 1:
             self.cards_array[suits[card.suit]][values[card.value]] = 0
             self.deck_size -= 1
